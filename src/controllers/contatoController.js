@@ -6,6 +6,7 @@ exports.index = (req, res) => {
   });
 };
 
+//registra um novo contato
 exports.register = async (req, res) => {
     try {
         const contato = new Contato(req.body);
