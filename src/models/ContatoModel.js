@@ -7,8 +7,6 @@ const ContatoSchema = new mongoose.Schema({
   email: { type: String, required: false, default: '' },
   telefone: { type: String, required: false, default: '' },
   criadoEm: { type: Date, default: Date.now },
- 
-  
 });
 
 const ContatoModel = mongoose.model("Contato", ContatoSchema);
@@ -32,7 +30,7 @@ Contato.prototype.valida = function() {
   this.cleanUp();
   // Validação
   // O e-mail precisa ser válido
-  if (this.body.email && !validator.isEmail(this.body.email)) this.errors.push("E-mail inválido.");
+  if(this.body.email && !validator.isEmail(this.body.email)) this.errors.push("E-mail inválido.");
   if(!this.body.nome) this.errors.push('Nome é um campo obrigatório.');
   if(!this.body.email && !this.body.telefone){
     this.errors.push('Pelo menos um contato precisa ser enviado: e-mail ou telefone');
@@ -63,8 +61,8 @@ Contato.prototype.edit = async function(id){
 // Métodos estáticos
 Contato.buscaPorId = async function(id){
   if(typeof id !== 'string') return;
-  const user = await ContatoModel.findById(id);
-  return user;
+  const contato = await ContatoModel.findById(id);
+  return contato;
 }
 
 Contato.buscaContatos = async function(){
